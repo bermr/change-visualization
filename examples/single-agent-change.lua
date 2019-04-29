@@ -1,6 +1,7 @@
 -- @example A simple example with one Agent that moves randomly in space.
 -- @image single-agent.png
-require("changeApi")
+package.path = package.path .. ";../lua/?.lua"
+require("Change")
 
 singleFooAgent = Agent{
     execute = function(self)
@@ -48,7 +49,7 @@ map = Map{
 changeMap{
     target = cs,
     select = {"color"},
-    type = "trail"
+    type = "accumulation"
 }
 
 t = Timer{
@@ -57,7 +58,8 @@ t = Timer{
         cs:execute()
     end},
     Event{action = singleFooAgent},
-    Event{action = map}
+    Event{action = map},
+    Event{action = change_map}
 }
 
 t:run(1000)

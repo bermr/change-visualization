@@ -13,6 +13,7 @@ function changeMap(data)
         updateSynchronize(data)
     end
     createMap(data)
+
 end
 
 -- sobrecarrega o synchronize do cellularspace passado,
@@ -59,10 +60,10 @@ function createMap(data)
         if (data.target.maps[v] ~= 1) then
             data.target.maps[v] = 1
             local change_ = v .. "Change"
-            local mapname = v
+            local mapname = "'"..v:sub(1,1):upper()..v:sub(2) .. " Change'"
 
             if (data.type == "moment") then
-                map = Map{
+                change_map = Map{
                     title =  mapname,
                     target = data.target,
                     select = change_,
@@ -70,17 +71,17 @@ function createMap(data)
                     value = {0,1}
                 }
             elseif (data.type == "accumulation") then
-                map = Map{
+                change_map = Map{
                     title =  mapname,
                     target = data.target,
                     select = change_,
                     color = {"blue", "red"},
                     min = 0,
-                    max = 5,
-                    slices = 5
+                    max = 10,
+                    slices = 10
                 }
             elseif (data.type == "trail") then
-                map = Map{
+                change_map = Map{
                     title =  mapname,
                     target = data.target,
                     select = change_,
@@ -134,18 +135,11 @@ function createElements(data)
         if (not hasValue(data.target.change, v)) then
             table.insert(data.target.change, v)
         end
-        --print(data.select[i])
     end
-
-    --[[print("itens: ")
-    for i, v in pairs (data.target.change) do
-        print(data.target.change[i])
-    end]]
 
     forEachCell(data.target, function(cell)
         for i, v in pairs(data.target.change) do
             cell[v .. "Change"] = 0
-            --print(v)
         end
     end)
 end
