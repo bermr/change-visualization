@@ -1,0 +1,402 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+	    
+	    	<title>Change Visualization Functions</title>
+	    
+	    <link rel="stylesheet" href="../luadoc.css" type="text/css" />
+		<!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/-->
+	</head>
+
+	<body>
+		<div id="container">
+			<div id="product">
+				<div id="product_logo">
+					
+					<img src='../img/logo.png'/><br/></div>
+					
+				<div id="product_name"><big><b></b></big></div>
+				<div id="product_description"></div>
+			</div> <!-- id="product" -->
+
+			<div id="main">
+				<div id="navigation">
+					<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+
+<h1>change-visualization</h1>
+<ul>
+	
+		<li><a href="../index.html">Index</a></li>
+	
+</ul>
+
+<!-- Module list -->
+
+
+<!-- Models list -->
+
+	
+	
+		
+	
+		
+	
+		
+	
+
+	
+
+
+<!-- Types list -->
+
+	
+	
+		
+	
+		
+	
+		
+	
+
+	
+
+	<ul>
+		
+		
+		
+		
+	</ul>
+
+
+<!-- Files list -->
+
+	
+	
+		
+	
+		
+			
+		
+	
+		
+	
+
+	
+		<h1>Functions</h1>
+	
+
+	<ul>
+		
+		
+					<li><strong>Change</strong></li>
+				
+			
+		
+		
+	</ul>
+
+
+<!-- Examples -->
+
+	
+		<h1><a href="../files/examples.html">Examples</a></h1>
+	
+
+
+
+<!-- Data -->
+
+
+<!-- Font -->
+
+
+
+				</div> <!-- id="navigation" -->
+
+				<div id="content">
+					<h1>Change
+					
+					
+					</h1>
+
+					
+						<span class="description"></span>
+					
+					
+					
+					
+
+					
+						
+
+						
+							<h2 class="function_list">Functions</h2>
+							<table class="function_list">
+							
+								
+									<tr>
+										<td class="name" nowrap><a href="#ChangeMap">ChangeMap</a>&nbsp;
+<td class="summary">A Map that visualizes change.</td>
+									</tr>
+								
+							
+						
+						</table>
+					
+
+					
+
+					
+						
+						<dl class="function">
+							
+									<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+
+<dt><h2><a name="ChangeMap">
+
+	</a><strong>ChangeMap</strong>&nbsp;
+
+</h2></dt>
+<dd>
+
+
+<span class="description">
+
+A Map that visualizes change.<br><br></span>
+
+
+	
+
+
+<!-- Function arguments -->
+  <h3>Arguments</h3>
+<ul><span class="arg">
+
+    <li>
+	  <strong>color</strong>: A table with the colors for the attributes. Colors can be described as strings ("red", "green", "blue", "white", "black", "yellow", "brown", "cyan", "gray", "magenta", "orange", "purple", and their light and dark compositions, such as "lightGray" and "darkGray"), as tables with three integer numbers representing RGB compositions, such as {0, 0, 0}, or even as a string with a ColorBrewer format (see <a href="http://colorbrewer2.org/" target="_blank">http://colorbrewer2.org/</a>). The colors available and the maximum number of slices for each of them are:
+    </li> 
+    
+      </span>
+      <!-- Strategy of the argument -->
+       
+      <table class="arg_tab">
+	  
+      
+        <tr>
+        
+          
+            <th>
+            Name
+            </th>
+          
+          
+            <th>
+            Max
+            </th>
+          
+        
+        <tr>
+        
+          
+            <td>
+            Accent, Dark, Pastel2, Set2
+            </td>
+          
+          
+            <td>
+            8
+            </td>
+          
+        
+        <tr>
+        
+          
+            <td>
+            Pastel1, Set1
+            </td>
+          
+          
+            <td>
+            9
+            </td>
+          
+        
+        <tr>
+        
+          
+            <td>
+            BrBG, PRGn, RdYlGn, Spectral
+            </td>
+          
+          
+            <td>
+            11
+            </td>
+          
+        
+        <tr>
+        
+          
+            <td>
+            PiYG, PuOr, RdBu, RdGy, RdYlBu
+            </td>
+          
+          
+            <td>
+            11
+            </td>
+          
+        
+        <tr>
+        
+          
+            <td>
+            Paired, Set3
+            </td>
+          
+          
+            <td>
+            12
+            </td>
+          
+        
+        <tr>
+        
+          
+            <td>
+            Blues, BuGn, BuPu, GnBu, Greens, Greys, Oranges, OrRd, PuBu, PuBuGn, PuRd, Purples, RdPu, Reds, YlGn, YlGnBu, YlOrBr, YlOrRd
+            </td>
+          
+          
+            <td>
+            20
+            </td>
+          
+        
+        </tr>    
+      </table>
+      <span class="arg">
+    
+  
+    <li>
+	  <strong>max</strong>: The maximum value of the attribute.
+    </li> 
+    
+  
+    <li>
+	  <strong>min</strong>: The minimum value of the attribute.
+    </li> 
+    
+  
+    <li>
+	  <strong>select</strong>: A table with the name of the attribute or attributes to be visualized.
+    </li> 
+    
+  
+    <li>
+	  <strong>target</strong>: A CellularSpace, Agent or Society.
+    </li> 
+    
+  
+    <li>
+	  <strong>type</strong>: The change visualization type: Moment, accumulation or trail.
+    </li> 
+    
+  
+  </span></ul>
+
+
+
+
+
+
+
+<h3>Usage</h3>
+<pre class="example"><code><span class="id">import</span>(<span class="string">"change"</span>)
+<span class="id">import</span>(<span class="string">'change'</span>)
+
+<span class="id">rand</span> = <span class="function">Random</span>{}
+
+<span class="id">cell</span> = <span class="function">Cell</span>{
+    <span class="id">init</span> = <span class="reserved">function</span>(<span class="id">cell</span>)
+        <span class="reserved">if</span> <span class="id">rand</span>:<span class="id">number</span>() > <span class="number">0.1</span> <span class="reserved">then</span>
+            <span class="id">cell</span>.<span class="id">cover</span> = <span class="number">1</span>
+        <span class="reserved">else</span>
+            <span class="id">cell</span>.<span class="id">cover</span> = <span class="number">4</span>
+        <span class="reserved">end</span>
+    <span class="reserved">end</span>
+}
+
+<span class="id">cs</span> = <span class="function">CellularSpace</span>{
+    <span class="id">xdim</span> = <span class="number">50</span>,
+    <span class="id">instance</span> = <span class="id">cell</span>,
+    <span class="id">execute</span> = <span class="reserved">function</span>()
+        <span class="id">forEachCell</span>(<span class="id">cs</span>, <span class="reserved">function</span>(<span class="id">cell</span>)
+            <span class="reserved">if</span> <span class="id">cell</span>.<span class="id">past</span>.<span class="id">cover</span> == <span class="number">1</span> <span class="reserved">then</span>
+                <span class="id">forEachNeighbor</span>(<span class="id">cell</span>, <span class="reserved">function</span>(<span class="id">neighbor</span>)
+                    <span class="reserved">if</span> <span class="id">neighbor</span>.<span class="id">past</span>.<span class="id">cover</span> == <span class="number">2</span> <span class="reserved">then</span>
+                        <span class="id">cell</span>.<span class="id">cover</span> = <span class="number">2</span>
+                    <span class="reserved">end</span>
+                <span class="reserved">end</span>)
+            <span class="reserved">elseif</span> <span class="id">cell</span>.<span class="id">past</span>.<span class="id">cover</span> == <span class="number">2</span> <span class="reserved">then</span>
+                <span class="id">cell</span>.<span class="id">cover</span> = <span class="number">3</span>
+            <span class="reserved">end</span>
+        <span class="reserved">end</span>)
+    <span class="reserved">end</span>
+}
+
+<span class="id">cs</span>:<span class="id">createNeighborhood</span>{
+    <span class="id">strategy</span> = <span class="string">"moore"</span>,
+    <span class="id">self</span> = <span class="reserved">false</span>
+}
+
+<span class="id">cs</span>:<span class="id">get</span>(<span class="number">25</span>, <span class="number">25</span>).<span class="id">cover</span> = <span class="number">2</span>
+
+<span class="id">change_map</span> = <span class="function">ChangeMap</span>{
+    <span class="id">target</span> = <span class="id">cs</span>,
+    <span class="id">select</span> = {<span class="string">"cover"</span>},
+    <span class="id">type</span> = <span class="string">"accumulation"</span>,
+    <span class="id">max</span> = <span class="number">2</span>
+}
+
+<span class="id">t</span> = <span class="function">Timer</span>{
+    <span class="function">Event</span>{<span class="id">action</span> = <span class="reserved">function</span>()
+        <span class="id">cs</span>:<span class="id">synchronize</span>()
+        <span class="id">cs</span>:<span class="id">execute</span>()
+    <span class="reserved">end</span>},
+    <span class="function">Event</span>{<span class="id">action</span> = <span class="id">change_map</span>}
+}
+
+<span class="id">t</span>:<span class="id">run</span>(<span class="number">100</span>)</code></pre>
+
+
+
+
+</dd>
+
+
+						    	
+							
+						</dl>
+					
+
+					
+
+				</div> <!-- id="content" -->
+			</div> <!-- id="main" -->
+
+			<div id="about">
+				<p>This webpage was automatically created using <a target="_blank" href="http://www.terrame.org">TerraME</a>.</p>
+			</div> <!-- id="about" -->
+
+		</div> <!-- id="container" -->	
+	</body>
+</html>
+

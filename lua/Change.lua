@@ -1,48 +1,6 @@
+-------------------------------------------------------------------------------------------
 -- This package allows the user to view the
 -- amount of change happening in the simulation.
--- @arg target A CellularSpace, Agent or Society
--- @arg select A table with the name of the attribute or attributes to be visualized.
--- @arg type The change visualization type: Moment, accumulation or trail
--- @arg data.color A table with the colors for the attributes. Colors can be described as strings
--- ("red", "green", "blue", "white", "black",
--- "yellow", "brown", "cyan", "gray", "magenta", "orange", "purple", and their light and dark
--- compositions, such as "lightGray" and "darkGray"), as tables with three integer numbers
--- representing RGB compositions, such as {0, 0, 0}, or even as a string with a ColorBrewer format
--- (see http://colorbrewer2.org/). The colors available and the maximum number of slices for each
--- of them are:
--- @tabular color
--- Name & Max \
--- Accent, Dark, Pastel2, Set2 & 8 \
--- Pastel1, Set1 & 9 \
--- BrBG, PRGn, RdYlGn, Spectral & 11 \
--- PiYG, PuOr, RdBu, RdGy, RdYlBu & 11 \
--- Paired, Set3 & 12 \
--- Blues, BuGn, BuPu, GnBu, Greens, Greys, Oranges, OrRd, PuBu, PuBuGn, PuRd, Purples, RdPu, Reds, YlGn, YlGnBu, YlOrBr, YlOrRd & 20 \
--- @arg min The minimum value of the attribute
--- @arg max The maximum value of the attribute
--- @usage cell = Cell{
---     cover = Random{min = 0, max = 50},
--- }
---
--- cs = CellularSpace{
---     xdim = 10,
---     instance = cell
--- }
---
--- change_map = ChangeMap{
---     target = cs,
---     select = {"cover"},
---     min = 0,
---     max = 50,
---     color = {"blue", "red"}
--- }
---
--- timer = Timer{
---     Event{action = function()
---         model.cs:synchronize()
---     end},
---     Event{action = model.change_map}
--- }
 
 local function updateSynchronize(data)
     data.target.synchronize_ = data.target.synchronize
@@ -189,6 +147,84 @@ local function createElements(data)
         end
     end)
 end
+
+--- A Map that visualizes change.
+-- @arg data.target A CellularSpace, Agent or Society.
+-- @arg data.select A table with the name of the attribute or attributes to be visualized.
+-- @arg data.type The change visualization type: Moment, accumulation or trail.
+-- @arg data.color A table with the colors for the attributes. Colors can be described as strings
+-- ("red", "green", "blue", "white", "black",
+-- "yellow", "brown", "cyan", "gray", "magenta", "orange", "purple", and their light and dark
+-- compositions, such as "lightGray" and "darkGray"), as tables with three integer numbers
+-- representing RGB compositions, such as {0, 0, 0}, or even as a string with a ColorBrewer format
+-- (see http://colorbrewer2.org/). The colors available and the maximum number of slices for each
+-- of them are:
+-- @tabular color
+-- Name & Max \
+-- Accent, Dark, Pastel2, Set2 & 8 \
+-- Pastel1, Set1 & 9 \
+-- BrBG, PRGn, RdYlGn, Spectral & 11 \
+-- PiYG, PuOr, RdBu, RdGy, RdYlBu & 11 \
+-- Paired, Set3 & 12 \
+-- Blues, BuGn, BuPu, GnBu, Greens, Greys, Oranges, OrRd, PuBu, PuBuGn, PuRd, Purples, RdPu, Reds, YlGn, YlGnBu, YlOrBr, YlOrRd & 20 \
+-- @arg data.min The minimum value of the attribute.
+-- @arg data.max The maximum value of the attribute.
+-- @usage import("change")
+-- import('change')
+--
+-- rand = Random{}
+--
+-- cell = Cell{
+--     init = function(cell)
+--         if rand:number() > 0.1 then
+--             cell.cover = 1
+--         else
+--             cell.cover = 4
+--         end
+--     end
+-- }
+--
+-- cs = CellularSpace{
+--     xdim = 50,
+--     instance = cell,
+--     execute = function()
+--         forEachCell(cs, function(cell)
+--             if cell.past.cover == 1 then
+--                 forEachNeighbor(cell, function(neighbor)
+--                     if neighbor.past.cover == 2 then
+--                         cell.cover = 2
+--                     end
+--                 end)
+--             elseif cell.past.cover == 2 then
+--                 cell.cover = 3
+--             end
+--         end)
+--     end
+-- }
+--
+-- cs:createNeighborhood{
+--     strategy = "moore",
+--     self = false
+-- }
+--
+-- cs:get(25, 25).cover = 2
+--
+-- change_map = ChangeMap{
+--     target = cs,
+--     select = {"cover"},
+--     type = "accumulation",
+--     max = 2
+-- }
+--
+-- t = Timer{
+--     Event{action = function()
+--         cs:synchronize()
+--         cs:execute()
+--     end},
+--     Event{action = change_map}
+-- }
+--
+-- t:run(100)
 
 function ChangeMap(data)
     verifyData(data)
