@@ -54,6 +54,7 @@ local function createMap(data)
             data.target.maps[v] = 1
             local change_ = v .. "Change"
             local mapname = v:sub(1,1):upper()..v:sub(2).." Change"
+            local change_map = {}
 
             if (data.type == "moment") then
                 change_map = Map{
@@ -119,7 +120,7 @@ local function verifyData(data)
 end
 
 local function hasValue (tab, val)
-    for index, value in ipairs(tab) do
+    for value in ipairs(tab) do
         if value == val then
             return true
         end

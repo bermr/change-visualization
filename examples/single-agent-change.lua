@@ -23,7 +23,7 @@ SingleAgent = Model{
         model.cs = CellularSpace{
             xdim = model.dim,
             instance = model.cell,
-            execute = function(self)
+            execute = function()
                 forEachCell(model.cs, function(cell)
                     cell.color = cell:getColor()
                 end)

@@ -50,9 +50,9 @@ return{
 
         cs:init()
         local timer = Timer{
-            Event{action = function(ev)
-            cs:synchronize()
-            cs:execute()
+            Event{action = function()
+                cs:synchronize()
+                cs:execute()
             end},
             Event{action = change_map}
         }
