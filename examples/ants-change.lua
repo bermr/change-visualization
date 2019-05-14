@@ -1,8 +1,8 @@
 
 -- @example TerraME Ants model with change visualization.
--- @image ants-change.bmp
+-- @image ants-change.png
 
-import("change")
+import("changesmap")
 
 Ants = Model{
     dimension = 50,
@@ -13,6 +13,7 @@ Ants = Model{
     rateEvaporation = Choice{min = 0.000001, max = 0.999999, default = 0.2}, -- 0.5,  0.75
     init = function(model)
         local icell = Cell{
+            ant = "no",
             cover = "empty",
             chemical = 0,
             execute = function(cell) -- chemical evaporation
@@ -24,6 +25,11 @@ Ants = Model{
                     cell.cover = "empty"
                 elseif cell.chemical < 1 and cell.cover == "chemical" then
                     cell.cover = "lesschem"
+                end
+                if cell:getAgent() ~= nil then
+                    cell.ant = "yes"
+                else
+                    cell.ant = "no"
                 end
             end,
             getNextCoordinateTowardDestiny = function(cell, destiny)
@@ -260,16 +266,16 @@ Ants = Model{
 
         model.change_map = ChangeMap{
             target = model.cs,
-            select = {"cover"},
+            select = {"ant"},
             type = "accumulation",
-            max = 20
+            max = 40
         }
 
         model.timer = Timer{
             Event{action = model.soc},
             Event{action = model.cs},
             Event{action = model.map},
-            Event{action = model.change_map}
+            Event{action = model.change_map},
         }
     end
 }
@@ -278,7 +284,7 @@ ants = Ants{
     societySize = 50,
     rateDiffusion = 5,
     rateEvaporation = 0.5,
-    finalTime = 100
+    finalTime = 300
 }
 
 ants:run()

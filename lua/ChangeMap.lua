@@ -6,7 +6,7 @@ local function updateSynchronize(data)
     data.target.synchronize_ = data.target.synchronize
     data.target.synchronize = function(self)
         forEachCell(self, function(cell)
-            for i, v in pairs(data.target.change) do
+            for _, v in pairs(data.target.change) do
                 local v_ = v .. "Change"
                 local change = cell[v] ~= cell.past[v]
                 if (change == true) then
@@ -49,7 +49,7 @@ end
 
 local function createMap(data)
     setDefaultValues(data)
-    for i, v in pairs(data.target.change) do
+    for _, v in pairs(data.target.change) do
         if (data.target.maps[v] ~= 1) then
             data.target.maps[v] = 1
             local change_ = v .. "Change"
@@ -136,20 +136,20 @@ local function createElements(data)
     if (not data.target.maps) then
         data.target.maps = {}
     end
-    for i, v in pairs(data.select) do
+    for _, v in pairs(data.select) do
         if (not hasValue(data.target.change, v)) then
             table.insert(data.target.change, v)
         end
     end
 
     forEachCell(data.target, function(cell)
-        for i, v in pairs(data.target.change) do
+        for _, v in pairs(data.target.change) do
             cell[v .. "Change"] = 0
         end
     end)
 end
 
---- A Map that visualizes change.
+--- A Map that visualizes changes.
 -- @arg data.target A CellularSpace, Agent or Society.
 -- @arg data.select A table with the name of the attribute or attributes to be visualized.
 -- @arg data.type The change visualization type: Moment, accumulation or trail.
@@ -170,8 +170,8 @@ end
 -- Blues, BuGn, BuPu, GnBu, Greens, Greys, Oranges, OrRd, PuBu, PuBuGn, PuRd, Purples, RdPu, Reds, YlGn, YlGnBu, YlOrBr, YlOrRd & 20 \
 -- @arg data.min The minimum value of the attribute.
 -- @arg data.max The maximum value of the attribute.
--- @usage import("change")
--- import('change')
+-- @usage import("changesmap")
+-- import('changesmap')
 --
 -- rand = Random{}
 --

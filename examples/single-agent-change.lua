@@ -1,8 +1,8 @@
 
 -- @example A simple example with one Agent that moves randomly in space.
--- @image single-agent-change.bmp
+-- @image single-agent-change.png
 
-import("change")
+import("changesmap")
 
 SingleAgent = Model{
     quantity = 1,
@@ -74,6 +74,6 @@ SingleAgent = Model{
     end
 }
 
-singleAgent = SingleAgent{finalTime = 100}
+singleAgent = SingleAgent{finalTime = 1000}
 
 singleAgent:run()
