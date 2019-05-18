@@ -4,31 +4,34 @@
 
 local function updateSynchronize(data)
     data.target.synchronize_ = data.target.synchronize
-    data.target.synchronize = function(self)
-        forEachCell(self, function(cell)
-            for _, v in pairs(data.target.change) do
-                local v_ = v .. "Change"
-                local change = cell[v] ~= cell.past[v]
-                if (change == true) then
-                    if (data.type == "moment") then
-                        cell[v_] = 1
-                    elseif (data.type == "accumulation") then
-                        cell[v_] = cell.past[v_] + 1
-                    elseif (data.type == "trail") then
-                        cell[v_] = 50
-                    end
-                else
-                    if (data.type == "moment") then
-                        cell[v_] = 0
-                    elseif (data.type == "trail") then
-                        if (cell.past[v_] > 0) then
-                            cell[v_] = cell.past[v_] - 1
+
+    if type(data.target) == "CellularSpace" then
+        data.target.synchronize = function(self)
+            forEachCell(self, function(cell)
+                for _, v in pairs(data.target.change) do
+                    local v_ = v .. "Change"
+                    local change = cell[v] ~= cell.past[v]
+                    if (change == true) then
+                        if (data.type == "moment") then
+                            cell[v_] = 1
+                        elseif (data.type == "accumulation") then
+                            cell[v_] = cell.past[v_] + 1
+                        elseif (data.type == "trail") then
+                            cell[v_] = 50
+                        end
+                    else
+                        if (data.type == "moment") then
+                            cell[v_] = 0
+                        elseif (data.type == "trail") then
+                            if (cell.past[v_] > 0) then
+                                cell[v_] = cell.past[v_] - 1
+                            end
                         end
                     end
                 end
-            end
-        end)
-        data.target:synchronize_()
+            end)
+            data.target:synchronize_()
+        end
     end
 end
 
@@ -58,7 +61,7 @@ local function createMap(data)
 
             if (data.type == "moment") then
                 change_map = Map{
-                    title  =  mapname,
+                    title  = mapname,
                     target = data.target,
                     select = change_,
                     color  = data.color,
@@ -66,7 +69,7 @@ local function createMap(data)
                 }
             elseif (data.type == "accumulation") then
                 change_map = Map{
-                    title  =  mapname,
+                    title  = mapname,
                     target = data.target,
                     select = change_,
                     color  = data.color,
@@ -76,7 +79,7 @@ local function createMap(data)
                 }
             elseif (data.type == "trail") then
                 change_map = Map{
-                    title =  mapname,
+                    title  = mapname,
                     target = data.target,
                     select = change_,
                     color = data.color,
@@ -101,22 +104,22 @@ local function verifyData(data)
     if type(data.target) == "CellularSpace" then
         if (data.target.xMin == 0 and data.target.xMax == 0) or (data.target.yMin == 0 and data.target.yMax == 0) then
             customError("It is not possible to create a Map from this CellularSpace as its objects do not have a valid (x, y) location.")
+            end
         end
-    end
 
-    local validArgs = {"type", "background", "color", "font", "grid", "grouping", "invert", "label", "max", "min",
-    "precision", "select", "size", "slices", "stdColor", "stdDeviation", "symbol", "target", "value", "title"}
+        local validArgs = {"type", "background", "color", "font", "grid", "grouping", "invert", "label", "max", "min",
+        "precision", "select", "size", "slices", "stdColor", "stdDeviation", "symbol", "target", "value", "title"}
 
-    verifyUnnecessaryArguments(data, validArgs)
+        verifyUnnecessaryArguments(data, validArgs)
 
-    if type(data.target) == "Agent" then
-        local s = Society{instance = Agent{}, quantity = 0}
-        s:add(data.target)
-        data.target = s
-        return Map(data)
-    end
+        if type(data.target) == "Agent" then
+            local s = Society{instance = Agent{}, quantity = 0}
+            s:add(data.target)
+            data.target = s
+            return Map(data)
+        end
 
-    optionalTableArgument(data, "value", "table")
+        optionalTableArgument(data, "value", "table")
 end
 
 local function hasValue (tab, val)
@@ -142,17 +145,19 @@ local function createElements(data)
         end
     end
 
-    forEachCell(data.target, function(cell)
-        for _, v in pairs(data.target.change) do
-            cell[v .. "Change"] = 0
-        end
-    end)
+    if type(data.target) == "CellularSpace" then
+        forEachCell(data.target, function(cell)
+            for _, v in pairs(data.target.change) do
+                cell[v .. "Change"] = 0
+            end
+        end)
+    end
 end
 
 --- A Map that visualizes changes.
 -- @arg data.target A CellularSpace, Agent or Society.
 -- @arg data.select A table with the name of the attribute or attributes to be visualized.
--- @arg data.type The change visualization type: Moment, accumulation or trail.
+-- @arg data.type The change visualization type: moment, accumulation or trail.
 -- @arg data.color A table with the colors for the attributes. Colors can be described as strings
 -- ("red", "green", "blue", "white", "black",
 -- "yellow", "brown", "cyan", "gray", "magenta", "orange", "purple", and their light and dark
