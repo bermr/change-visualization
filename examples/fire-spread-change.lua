@@ -1,5 +1,5 @@
--- @example Fire spread example with change visualization
--- @image single-agent-change.png
+-- @example Fire spread example with change visualization.
+-- @image fire-spread-change.png
 
 import("changesmap")
 
@@ -40,10 +40,7 @@ cs = CellularSpace{
     end
 }
 
-cs:createNeighborhood{
-    strategy = "moore",
-    self = false
-}
+cs:createNeighborhood{}
 
 cs:get(25, 25).cover = BURNING
 
